@@ -9,7 +9,7 @@ npm install<br>
 npm link<br>
 И можно использовать команды date и number.
 <br><br>
-#Варианты использования date:#<br>
+Варианты использования date:<br>
 date current - текущаю дата и время<br>
 date current --year или date current -y - текущий год<br>
 date current --month или date current -m - текущий месяц<br>
