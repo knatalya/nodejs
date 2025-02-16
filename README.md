@@ -14,5 +14,5 @@ date current - текущаю дата и время<br>
 date current --year или date current -y - текущий год<br>
 date current --month или date current -m - текущий месяц<br>
 date current --date или date current -d - дата в календарном месяце<br>
-cmd add -d 2 - дата и время в формате ISO на два дня вперед, как пример<br>
-cmd sub --month 1 - дата и время в формате ISO на один месяц назад, как пример
+date add -d 2 - дата и время в формате ISO на два дня вперед, как пример<br>
+date sub --month 1 - дата и время в формате ISO на один месяц назад, как пример
