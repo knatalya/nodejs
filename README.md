@@ -10,7 +10,7 @@ npm link
 И можно использовать команды date и number.
 
 Варианты использования date:
-date current - текущаю дата и время
+date current - текущаю дата и время\n
 date current --year или date current -y - текущий год
 date current --month или date current -m - текущий месяц
 date current --date или date current -d - дата в календарном месяце
