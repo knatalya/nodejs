@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Book</title>
+</head>
+<body>
+  <h1>Create Book</h1>
+  <form action="/books/create" method="POST" enctype="multipart/form-data">
+    <label>Title: <input type="text" name="title" required></label><br>
+    <label>Description: <textarea name="description"></textarea></label><br>
+    <label>Authors: <input type="text" name="authors"></label><br>
+    <label>Favorite: <input type="checkbox" name="favorite" value="true"></label><br>
+    <label>Cover URL: <input type="text" name="fileCover"></label><br>
+    <label>File Name: <input type="text" name="fileName"></label><br>
+    <label>Book File: <input type="file" name="fileBook"></label><br>
+    <button type="submit">Create</button>
+  </form>
+  <a href="/books">Back to list</a>
+</body>
+</html>
