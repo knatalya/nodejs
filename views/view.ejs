@@ -1,0 +1,78 @@
+<!-- views/view.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title><%= book.title %></title>
+</head>
+<body>
+  <h1><%= book.title %></h1>
+  <p><strong>Description:</strong> <%= book.description %></p>
+  <p><strong>Authors:</strong> <%= book.authors %></p>
+  <p><strong>Favorite:</strong> <%= book.favorite ? 'Yes' : 'No' %></p>
+  <% if (book.fileCover) { %>
+    <img src="<%= book.fileCover %>" alt="Cover" style="max-width:200px">
+  <% } %>
+  <% if (book.fileBook) { %>
+    <p><a href="/books/<%= book.id %>/download">Download Book</a></p>
+  <% } %>
+
+  <p>
+    <a href="/books/<%= book.id %>/update">Edit</a> |
+    <form action="/books/<%= book.id %>/delete" method="POST" style="display:inline">
+      <button type="submit">Delete</button>
+    </form>
+  </p>
+  <a href="/books">Back to list</a>
+
+  <hr>
+
+  <section id="comments">
+    <h2>Обсуждение</h2>
+    <ul id="commentsList">
+      <% comments.forEach(c => { %>
+        <li>[<%= new Date(c.createdAt).toLocaleTimeString() %>] <strong><%= c.author %>:</strong> <%= c.text %></li>
+      <% }) %>
+    </ul>
+
+    <form id="commentForm">
+      <input type="text" id="author" placeholder="Ваше имя" required>
+      <textarea id="text" placeholder="Комментарий" required></textarea>
+      <button type="submit">Отправить</button>
+    </form>
+  </section>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    (function(){
+      const socket = io();
+      const bookId = '<%= book.id %>';
+
+      socket.emit('joinRoom', bookId);
+
+      const list = document.getElementById('commentsList');
+      const form = document.getElementById('commentForm');
+      const authorInput = document.getElementById('author');
+      const textInput = document.getElementById('text');
+
+      socket.on('commentAdded', comment => {
+        const li = document.createElement('li');
+        li.innerHTML = '[' + new Date(comment.createdAt).toLocaleTimeString() + '] ' +
+                       '<strong>' + comment.author + ':</strong> ' +
+                       comment.text;
+        list.appendChild(li);
+      });
+
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const author = authorInput.value.trim();
+        const text = textInput.value.trim();
+        if (!author || !text) return;
+        socket.emit('newComment', { bookId, author, text });
+        textInput.value = '';
+      });
+    })();
+  </script>
+</body>
+</html>
