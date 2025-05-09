@@ -1,0 +1,30 @@
+PS C:\Users\Sape\Desktop\Проекты\docker> git init
+Initialized empty Git repository in C:/Users/Sape/Desktop/Проекты/docker/.git/
+PS C:\Users\Sape\Desktop\Проекты\docker> docker pull node:15.14
+15.14: Pulling from library/node
+bfde2ec33fbc: Pull complete
+787f5e2f1047: Pull complete
+dc05be471d51: Pull complete
+7b6173a10eb8: Pull complete
+4b57d41e8391: Pull complete
+bd821d20ef8c: Pull complete
+989c5d2d2313: Pull complete
+55fab5cadd3c: Pull complete
+6041b69671c6: Pull complete
+Digest: sha256:608bba799613b1ebf754034ae008849ba51e88b23271412427b76d60ae0d0627
+Status: Downloaded newer image for node:15.14
+docker.io/library/node:15.14
+PS C:\Users\Sape\Desktop\Проекты\docker> docker run -it --name mynode ` --env NAME="Наталья" ` --env SURNAME="Каукенова" ` node:15.14 bash                                                                                                                         
+root@0985a6d6a2e9:/# set +H
+root@0985a6d6a2e9:/# node -e 'console.log(`Привет, ${process.env.NAME} ${process.env.SURNAME}!`);'
+Привет, Наталья Каукенова!
+root@0985a6d6a2e9:/# exit
+exit
+PS C:\Users\Sape\Desktop\Проекты\docker> docker stop mynode
+mynode
+PS C:\Users\Sape\Desktop\Проекты\docker> docker rm mynode
+mynode
+PS C:\Users\Sape\Desktop\Проекты\docker> docker rmi node:15.14
+Untagged: node:15.14
+Deleted: sha256:608bba799613b1ebf754034ae008849ba51e88b23271412427b76d60ae0d0627
+PS C:\Users\Sape\Desktop\Проекты\docker> 

@@ -1,0 +1,71 @@
+PS C:\Users\Sape\Desktop\Проекты\docker> docker pull node:15.14
+15.14: Pulling from library/node
+4b57d41e8391: Pull complete
+7b6173a10eb8: Pull complete
+bd821d20ef8c: Pull complete
+6041b69671c6: Pull complete
+dc05be471d51: Pull complete
+55fab5cadd3c: Pull complete
+bfde2ec33fbc: Pull complete
+989c5d2d2313: Pull complete
+787f5e2f1047: Pull complete
+Digest: sha256:608bba799613b1ebf754034ae008849ba51e88b23271412427b76d60ae0d0627
+Status: Downloaded newer image for node:15.14
+docker.io/library/node:15.14
+PS C:\Users\Sape\Desktop\Проекты\docker> mkdir -p data
+
+
+    Каталог: C:\Users\Sape\Desktop\Проекты\docker
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        09.05.2025     16:22                data
+
+PS C:\Users\Sape\Desktop\Проекты\docker> ls -Force
+
+
+    Каталог: C:\Users\Sape\Desktop\Проекты\docker
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d--h--        09.05.2025     16:04                .git
+d-----        09.05.2025     16:22                data
+-a----        04.05.2025     16:35           4264 1.txt
+-a----        09.05.2025     16:15           1545 2.txt
+-a----        09.05.2025     16:16              0 3.txt
+
+PS C:\Users\Sape\Desktop\Проекты\docker> docker run -d --name first_node ` -v "C:\Users\Sape\Desktop\Проекты\docker\data:/var/first/data" ` node:15.14 ` tail -f /dev/null
+1a304c988c96f285a4367d0dc083134ac42e291689a20bd7575ef3b5b1493b3f
+PS C:\Users\Sape\Desktop\Проекты\docker> docker run -d --name second_node ` -v "C:\Users\Sape\Desktop\Проекты\docker\data:/var/second/data" ` node:15.14 ` tail -f /dev/null
+f8ed5826c493faee73dbd710a777b0a7dd3905495085e4d09784b56016f4a0bf
+PS C:\Users\Sape\Desktop\Проекты\docker> docker exec first_node sh -c "echo 'Это файл из first_node' > /var/first/data/from_first.txt"
+PS C:\Users\Sape\Desktop\Проекты\docker> docker exec first_node ls -l /var/first/data                                           
+total 0
+-rw-r--r-- 1 root root 32 May  9 13:27 from_first.txt
+PS C:\Users\Sape\Desktop\Проекты\docker> "Это файл с хоста" | Out-File -Encoding UTF8 .\data\from_host.txt
+PS C:\Users\Sape\Desktop\Проекты\docker> Get-ChildItem .\data | Format-Table Mode,LastWriteTime,Length,Name -AutoSize
+
+Mode   LastWriteTime       Length Name
+----   -------------       ------ ----
+-a---- 09.05.2025 16:27:45     32 from_first.txt
+-a---- 09.05.2025 16:28:58     34 from_host.txt
+
+
+PS C:\Users\Sape\Desktop\Проекты\docker> docker exec second_node sh -c "ls -l /var/second/data"
+total 0
+-rw-r--r-- 1 root root 32 May  9 13:27 from_first.txt
+-rwxrwxrwx 1 root root 34 May  9 13:28 from_host.txt
+PS C:\Users\Sape\Desktop\Проекты\docker> docker exec second_node sh -c "cat /var/second/data/from_first.txt"
+Это файл из first_node
+PS C:\Users\Sape\Desktop\Проекты\docker> docker stop first_node second_node
+first_node
+second_node
+PS C:\Users\Sape\Desktop\Проекты\docker> docker rm first_node second_node
+first_node
+second_node
+PS C:\Users\Sape\Desktop\Проекты\docker> docker rmi node:15.14
+Untagged: node:15.14
+Deleted: sha256:608bba799613b1ebf754034ae008849ba51e88b23271412427b76d60ae0d0627
+PS C:\Users\Sape\Desktop\Проекты\docker> 

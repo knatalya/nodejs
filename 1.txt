@@ -1,0 +1,85 @@
+PS C:\Users\Sape\Desktop\Проекты\docker> docker pull busybox:latest
+latest: Pulling from library/busybox
+97e70d161e81: Pull complete
+Digest: sha256:37f7b378a29ceb4c551b1b5582e27747b855bbfaa73fa11914fe0df028dc581f
+Status: Downloaded newer image for busybox:latest
+docker.io/library/busybox:latest
+PS C:\Users\Sape\Desktop\Проекты\docker> docker run --name pinger busybox ping -c 7 netology.ru
+PING netology.ru (51.250.51.8): 56 data bytes
+64 bytes from 51.250.51.8: seq=0 ttl=63 time=103.948 ms
+64 bytes from 51.250.51.8: seq=1 ttl=63 time=107.119 ms
+64 bytes from 51.250.51.8: seq=2 ttl=63 time=105.620 ms
+64 bytes from 51.250.51.8: seq=3 ttl=63 time=105.077 ms
+64 bytes from 51.250.51.8: seq=4 ttl=63 time=103.954 ms
+64 bytes from 51.250.51.8: seq=5 ttl=63 time=104.477 ms
+64 bytes from 51.250.51.8: seq=6 ttl=63 time=103.183 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 103.183/104.768/107.119 ms
+PS C:\Users\Sape\Desktop\Проекты\docker> docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                     PORTS     NAMES
+5e229a8ed489   busybox   "ping -c 7 netology.…"   15 seconds ago   Exited (0) 8 seconds ago             pinger
+PS C:\Users\Sape\Desktop\Проекты\docker> docker logs pinger
+PING netology.ru (51.250.51.8): 56 data bytes
+64 bytes from 51.250.51.8: seq=0 ttl=63 time=103.948 ms
+64 bytes from 51.250.51.8: seq=1 ttl=63 time=107.119 ms
+64 bytes from 51.250.51.8: seq=2 ttl=63 time=105.620 ms
+64 bytes from 51.250.51.8: seq=3 ttl=63 time=105.077 ms
+64 bytes from 51.250.51.8: seq=4 ttl=63 time=103.954 ms
+64 bytes from 51.250.51.8: seq=5 ttl=63 time=104.477 ms
+64 bytes from 51.250.51.8: seq=6 ttl=63 time=103.183 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 103.183/104.768/107.119 ms
+PS C:\Users\Sape\Desktop\Проекты\docker> docker start pinger
+pinger
+PS C:\Users\Sape\Desktop\Проекты\docker> docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS         PORTS     NAMES
+5e229a8ed489   busybox   "ping -c 7 netology.…"   30 seconds ago   Up 4 seconds             pinger
+PS C:\Users\Sape\Desktop\Проекты\docker> docker logs pinger
+PING netology.ru (51.250.51.8): 56 data bytes
+64 bytes from 51.250.51.8: seq=0 ttl=63 time=103.948 ms
+64 bytes from 51.250.51.8: seq=1 ttl=63 time=107.119 ms
+64 bytes from 51.250.51.8: seq=2 ttl=63 time=105.620 ms
+64 bytes from 51.250.51.8: seq=3 ttl=63 time=105.077 ms
+64 bytes from 51.250.51.8: seq=4 ttl=63 time=103.954 ms
+64 bytes from 51.250.51.8: seq=5 ttl=63 time=104.477 ms
+64 bytes from 51.250.51.8: seq=6 ttl=63 time=103.183 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 103.183/104.768/107.119 ms
+PING netology.ru (51.250.51.8): 56 data bytes
+64 bytes from 51.250.51.8: seq=0 ttl=63 time=103.525 ms
+64 bytes from 51.250.51.8: seq=1 ttl=63 time=103.286 ms
+64 bytes from 51.250.51.8: seq=2 ttl=63 time=103.743 ms
+64 bytes from 51.250.51.8: seq=3 ttl=63 time=106.952 ms
+64 bytes from 51.250.51.8: seq=4 ttl=63 time=108.760 ms
+64 bytes from 51.250.51.8: seq=5 ttl=63 time=104.031 ms
+64 bytes from 51.250.51.8: seq=6 ttl=63 time=104.651 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 103.286/104.992/108.760 ms
+
+PS C:\Users\Sape\Desktop\Проекты\docker> docker logs pinger | findstr /R "^PING netology\.ru" | Measure-Object -Line
+
+Lines Words Characters Property
+----- ----- ---------- --------
+    2
+
+
+PS C:\Users\Sape\Desktop\Проекты\docker> docker logs pinger | findstr /R "seq=" | Measure-Object -Line
+Lines Words Characters Property
+----- ----- ---------- --------
+    14
+
+
+PS C:\Users\Sape\Desktop\Проекты\docker> docker rm pinger
+pinger
+PS C:\Users\Sape\Desktop\Проекты\docker> docker rmi busybox:latest
+Untagged: busybox:latest
+Deleted: sha256:37f7b378a29ceb4c551b1b5582e27747b855bbfaa73fa11914fe0df028dc581f
+PS C:\Users\Sape\Desktop\Проекты\docker> 
