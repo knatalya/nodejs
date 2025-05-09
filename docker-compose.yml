@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  library-app:
+    image: knatalya2/library-app:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - COUNTER_URL=http://counter-service:4000
+    ports:
+      - '3000:3000'
+    depends_on:
+      - counter-service
+    volumes:
+      - ./uploads:/usr/src/app/uploads
+
+  counter-service:
+    build:
+      context: ./counter-service
+      dockerfile: Dockerfile
+    ports:
+      - '4000:4000'
+    volumes:
+      - counter-data:/data
+
+volumes:
+  counter-data:
