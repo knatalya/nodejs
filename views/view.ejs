@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= book.title %></title>
+</head>
+<body>
+  <h1><%= book.title %></h1>
+  <p><strong>Description:</strong> <%= book.description %></p>
+  <p><strong>Authors:</strong> <%= book.authors %></p>
+  <p><strong>Favorite:</strong> <%= book.favorite ? 'Yes' : 'No' %></p>
+  <% if (book.fileCover) { %>
+    <p><img src="<%= book.fileCover %>" alt="Cover" style="max-width:200px"></p>
+  <% } %>
+  <% if (book.fileBook) { %>
+    <p><a href="/books/<%= book.id %>/download">Download Book</a></p>
+  <% } %>
+  <p>
+    <a href="/books/<%= book.id %>/update">Edit</a> | 
+    <form action="/books/<%= book.id %>/delete" method="POST" style="display:inline">
+      <button type="submit">Delete</button>
+    </form>
+  </p>
+  <a href="/books">Back to list</a>
+</body>
+</html>
