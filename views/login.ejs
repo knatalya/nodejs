@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head><title>Login / Signup</title></head>
+<body>
+  <% if (message) { %><p style="color:red"><%= message %></p><% } %>
+  <h2>Login</h2>
+  <form method="post" action="/api/user/login">
+    <label>Username:<input name="username" required></label><br>
+    <label>Password:<input type="password" name="password" required></label><br>
+    <button type="submit">Login</button>
+  </form>
+  <h2>Signup</h2>
+  <form method="post" action="/api/user/signup">
+    <label>Username:<input name="username" required></label><br>
+    <label>Password:<input type="password" name="password" required></label><br>
+    <button type="submit">Signup</button>
+  </form>
+</body>
+</html>
+
+// views/me.ejs
+<!DOCTYPE html>
+<html>
+<head><title>Profile</title></head>
+<body>
+  <h1>Welcome, <%= user.username %>!</h1>
+  <p>Your user ID is <%= user.id %></p>
+  <a href="/api/user/login">Logout</a>
+</body>
+</html>
