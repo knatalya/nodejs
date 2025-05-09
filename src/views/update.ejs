@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update <%= book.title %></title>
+</head>
+<body>
+  <h1>Update Book</h1>
+  <form action="/books/<%= book.id %>/update" method="POST" enctype="multipart/form-data">
+    <label>Title: <input type="text" name="title" value="<%= book.title %>" required></label><br>
+    <label>Description: <textarea name="description"><%= book.description %></textarea></label><br>
+    <label>Authors: <input type="text" name="authors" value="<%= book.authors %>"></label><br>
+    <label>Favorite: <input type="checkbox" name="favorite" value="true" <%= book.favorite ? 'checked' : '' %>></label><br>
+    <label>Cover URL: <input type="text" name="fileCover" value="<%= book.fileCover %>"></label><br>
+    <label>File Name: <input type="text" name="fileName" value="<%= book.fileName %>"></label><br>
+    <label>Book File: <input type="file" name="fileBook"></label><br>
+    <button type="submit">Save</button>
+  </form>
+  <a href="/books/<%= book.id %>">Cancel</a>
+</body>
+</html>
