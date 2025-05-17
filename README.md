@@ -95,4 +95,15 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## License
 
+Создайте проект NestJS.
+Порядок выполнения работы
+
+Создайте новый проект NestJS через Nest CLI.
+Создайте сервис BooksService. BooksService должен хранить данные в памяти (пока просто в переменной).
+Создайте контроллер BooksController. Контроллер должен использовать BooksService для получения данных.
+В этой домашней работе не нужно реализовывать:
+
+подключения базы,
+загрузки файлов,
+
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
