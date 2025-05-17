@@ -96,3 +96,17 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+Выполните задания.
+
+Задание 1.
+
+Сделайте обращение к GitHub API, как в примерах на лекции, с использованием RxJS. Пример реализации этого запроса предоставлен в стартовом проекте.
+
+https://api.github.com/search/repositories?q=${текст запроса}
+Задание 2.
+
+С использованием RxJS сделайте запросы к любому общедоступному API (например, аналогичное с GitHub API GitLab).
+
+https://gitlab.com/api/v4/projects?search=${текст запроса}
+В основе мы используем стартовый пакет NestJS
