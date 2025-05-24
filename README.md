@@ -96,3 +96,27 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+Выполните задания.
+
+Задание 1.
+
+Установите пакет @nestjs/testing.
+
+Задание 2.
+
+Напишите unit-тесты на BooksService.
+
+При написании теста используйте утилиты из @nestjs/testing.
+
+При создании тестового модуля используйте секцию providers, чтобы передать модель.
+
+В качестве токена модели используйте getModelToken.
+
+Задание 3.
+
+Напишите e2e-тесты для BooksController.
+
+При создании тестового модуля используйте секцию providers, чтобы подменить BooksService.
+
+Вам не нужно целиком реализовывать BooksService. Достаточно использовать jest.fn() для создания заглушек.
