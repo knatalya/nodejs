@@ -96,3 +96,33 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+Выполните задания.
+
+Задание 1.
+
+Установите пакет @nestjs/websockets.
+
+Задание 2.
+
+Создайте модуль для работы с комментариями.
+
+Создайте модель BookCommentModel.
+Создайте сервис BookCommentsService для работы с BookCommentModel.
+Реализуйте CRUD для работы BookCommentModel и метод findAllBookComment(bookId).
+Модель BookCommentModel должна хранить:
+
+{
+    id: "number"
+    bookId: "number"
+    comment: "string"  
+}
+Задание 3.
+
+Создайте модуль для работы с комментариями через WebSocket.
+
+Создайте класс Gateway.
+Подключите Gateway к приложению.
+Подключите BookCommentsService к Gateway.
+Добавьте обработчик getAllComments, который получает ID книги и возвращает список всех комментариев.
+Добавьте обработчик addComment, который получает текст комментария и сохраняет его.
